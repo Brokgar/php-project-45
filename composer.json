@@ -1,0 +1,19 @@
+{
+  "name": "hexlet/code",
+  "description": "Brain games",
+  "autoload": {
+    "psr-4": {
+      "Hexlet\\Code\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Max Kavun",
+      "email": "max.kavun@gmail.com"
+    }
+  ],
+  "require": {},
+  "bin": [
+    "bin/brain-games"
+  ]
+}
