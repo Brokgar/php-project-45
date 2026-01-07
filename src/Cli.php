@@ -5,11 +5,7 @@ namespace BrainGames\Cli;
 use function cli\line;
 use function cli\prompt;
 
-/**
- * Запускает приветственное взаимодействие с пользователем
- *
- * @return string Имя пользователя
- */
+
 function welcomeUser(): string
 {
     line('Welcome to the Brain Games!');
