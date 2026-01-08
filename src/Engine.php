@@ -2,7 +2,6 @@
 
 namespace BrainGames\Engine;
 
-
 function gcd(int $a, int $b): int
 {
     while ($b !== 0) {
@@ -21,8 +20,7 @@ function makeArray(): array
     $step     = rand(1, 5);
     $sequence = rand(5, 10);
 
-    for ($index = 1; $index < $sequence; $index++)
-    {
+    for ($index = 1; $index < $sequence; $index++) {
         $currentElement = $start + $index * $step;
         $numbers[] = $currentElement;
     }
