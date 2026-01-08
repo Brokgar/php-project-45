@@ -16,9 +16,9 @@ function gcd(int $a, int $b): int
 function makeArray(): array
 {
     $numbers  = array();
-    $start    = rand(1, 60);
-    $step     = rand(1, 5);
-    $sequence = rand(5, 10);
+    $start    = rand(1, 20);
+    $step     = rand(1, 10);
+    $sequence = 10;
 
     for ($index = 1; $index < $sequence; $index++) {
         $currentElement = $start + $index * $step;
