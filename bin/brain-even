@@ -24,10 +24,12 @@ while ($winStreak < 3) {
     if ($answer === $correctAnswer) {
         line('Correct!');
         $winStreak += 1;
+        
     } else {
         line("'%s' is wrong answer ;(. Correct answer was '%s'.", $answer, $correctAnswer);
         line("Let's try again, %s!", $name);
         $winStreak = 0;
+        return;
     }
 }
 
