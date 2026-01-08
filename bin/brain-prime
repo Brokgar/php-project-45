@@ -1,0 +1,36 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use function BrainGames\Cli\welcomeUser;
+use function BrainGames\Engine\isPrime;
+
+$name = welcomeUser();
+
+echo 'Answer "yes" if given number is prime. Otherwise answer "no".' . PHP_EOL;
+
+$rounds = 3;
+
+for ($i = 0; $i < $rounds; $i++){
+    
+    $number = rand(1, 100);
+
+    echo "Question: " . $number . PHP_EOL;
+    echo "Your answer: ";   
+
+    $answer = trim(fgets(STDIN));
+
+    $correctAnswer = isPrime($number) ? 'yes' : 'no';
+
+
+    if ($answer !== (string)$correctAnswer) {
+        echo "'{$answer}' is wrong answer ;(. Correct answer was '{$correctAnswer}'.\n";
+        echo "Let's try again, {$name}!\n";
+        exit;
+    }
+
+    echo "Correct!\n";
+}
+
+echo "Congratulations, {$name}!\n";

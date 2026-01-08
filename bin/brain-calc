@@ -1,0 +1,47 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use function BrainGames\Cli\welcomeUser;
+
+
+$name = welcomeUser();
+
+echo "What is the result of the expression?\n";
+
+$operations = ['+', '-', '*'];
+$rounds = 3;
+
+for ($i = 0; $i < $rounds; $i++) {
+    $a = rand(1, 50);
+    $b = rand(1, 50);
+    $op = $operations[array_rand($operations)];
+
+    switch ($op) {
+        case '+':
+            $correct = $a + $b;
+            break;
+        case '-':
+            $correct = $a - $b;
+            break;
+        case '*':
+            $correct = $a * $b;
+            break;
+    }
+
+    echo "Question: {$a} {$op} {$b}\n";
+    echo "Your answer: ";
+
+    $answer = trim(fgets(STDIN));
+
+    if ((int)$answer !== $correct) {
+        echo "'{$answer}' is wrong answer ;(. Correct answer was '{$correct}'.\n";
+        echo "Let's try again, {$name}!\n";
+        exit;
+    }
+
+    echo "Correct!\n";
+}
+
+echo "Congratulations, {$name}!\n";
