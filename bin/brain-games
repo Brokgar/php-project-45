@@ -1,16 +1,14 @@
 #!/usr/bin/env php
 <?php
 
-$autoloadPath1 = __DIR__ . '/../../../autoload.php';
-$autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
-if (file_exists($autoloadPath1)) {
-    require_once $autoloadPath1;
-} else {
-    require_once $autoloadPath2;
+$autoloadPaths = [
+    __DIR__ . '/../vendor/autoload.php',        // локальная разработка
+    __DIR__ . '/../../../autoload.php',         // установленный пакет
+];
+
+foreach ($autoloadPaths as $path) {
+    if (file_exists($path)) {
+        require_once $path;
+        break;
+    }
 }
-
-
-use function BrainGames\Cli\welcomeUser;
-
-$name = welcomeUser();
-

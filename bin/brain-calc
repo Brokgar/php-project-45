@@ -1,46 +1,18 @@
 #!/usr/bin/env php
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+$autoloadPaths = [
+    __DIR__ . '/../vendor/autoload.php',        // локальная разработка
+    __DIR__ . '/../../../autoload.php',         // установленный пакет
+];
 
-use function BrainGames\Cli\welcomeUser;
-use function cli\line;
-use function cli\prompt;
-
-$name = welcomeUser();
-
-echo "What is the result of the expression?\n";
-
-$operations = ['+', '-', '*'];
-$rounds = 3;
-
-for ($i = 0; $i < $rounds; $i++) {
-    $a = rand(1, 50);
-    $b = rand(1, 50);
-    $op = $operations[array_rand($operations)];
-
-    switch ($op) {
-        case '+':
-            $correct = $a + $b;
-            break;
-        case '-':
-            $correct = $a - $b;
-            break;
-        case '*':
-            $correct = $a * $b;
-            break;
+foreach ($autoloadPaths as $path) {
+    if (file_exists($path)) {
+        require_once $path;
+        break;
     }
-
-    line("Question: %d %s %d", $a, $op, $b);
-    $answer = prompt('Your answer');
-
-    if ((int)$answer !== $correct) {
-        line("'%s' is wrong answer ;(. Correct answer was '%d'.", $answer, $correctAnswer);
-        line("Let's try again, %s!", $name);
-        exit;
-    }
-
-    line('Correct!');
 }
 
-line('Congratulations, %s!', $name);
+use function BrainGames\Games\Calc\run;
+
+run();

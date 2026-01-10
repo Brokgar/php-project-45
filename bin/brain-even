@@ -1,36 +1,18 @@
 #!/usr/bin/env php
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+$autoloadPaths = [
+    __DIR__ . '/../vendor/autoload.php',        // локальная разработка
+    __DIR__ . '/../../../autoload.php',         // установленный пакет
+];
 
-use function BrainGames\Cli\welcomeUser;
-use function cli\line;
-use function cli\prompt;
-
-$name = welcomeUser();
-
-
-line('Answer "yes" if the number is even, otherwise answer "no".');
-
-$winStreak = 0;
-
-while ($winStreak < 3) {
-    $number = rand(1, 100);
-    line("Question: %d", $number);
-    $answer = prompt('Your answer');
-
-    $correctAnswer = ($number % 2 === 0) ? 'yes' : 'no';
-
-    if ($answer === $correctAnswer) {
-        line('Correct!');
-        $winStreak += 1;
-        
-    } else {
-        line("'%s' is wrong answer ;(. Correct answer was '%s'.", $answer, $correctAnswer);
-        line("Let's try again, %s!", $name);
-        $winStreak = 0;
-        return;
+foreach ($autoloadPaths as $path) {
+    if (file_exists($path)) {
+        require_once $path;
+        break;
     }
 }
 
-line("Congratulations, %s!", $name);
+use function BrainGames\Games\Even\run;
+
+run();

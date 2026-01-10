@@ -1,34 +1,18 @@
 #!/usr/bin/env php
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+$autoloadPaths = [
+    __DIR__ . '/../vendor/autoload.php',        // локальная разработка
+    __DIR__ . '/../../../autoload.php',         // установленный пакет
+];
 
-use function BrainGames\Cli\welcomeUser;
-use function BrainGames\Engine\isPrime;
-use function cli\line;
-use function cli\prompt;
-
-$name = welcomeUser();
-
-line('Answer "yes" if given number is prime. Otherwise answer "no".');
-
-$rounds = 3;
-
-for ($i = 0; $i < $rounds; $i++) {
-    $number = rand(1, 100);
-
-    line('Question: %d', $number);
-    $answer = prompt('Your answer');
-
-    $correctAnswer = isPrime($number) ? 'yes' : 'no';
-
-    if ($answer !== $correctAnswer) {
-        line("'%s' is wrong answer ;(. Correct answer was '%s'.", $answer, $correctAnswer);
-        line("Let's try again, %s!", $name);
-        exit;
+foreach ($autoloadPaths as $path) {
+    if (file_exists($path)) {
+        require_once $path;
+        break;
     }
-
-    line('Correct!');
 }
 
-line('Congratulations, %s!', $name);
+use function BrainGames\Games\Prime\run;
+
+run();
