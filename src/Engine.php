@@ -2,6 +2,58 @@
 
 namespace BrainGames\Engine;
 
+use function BrainGames\Engine\welcomeUser;
+use function cli\line;
+use function cli\prompt;
+
+const ROUNDS_COUNT = 3;
+
+/**
+ * Запускает игру
+ *
+ * @param string $description Описание игры
+ * @param array  $rounds      Массив раундов вида:
+ *                            [
+ *                              ['question' => '...', 'answer' => '...'],
+ *                              ...
+ *                            ]
+ */
+function run(string $description, array $rounds): void
+{
+    $name = welcomeUser();
+
+    line($description);
+
+    foreach ($rounds as $round) {
+        line('Question: %s', $round['question']);
+        $answer = prompt('Your answer');
+
+        if ($answer !== (string) $round['answer']) {
+            line(
+                "'%s' is wrong answer ;(. Correct answer was '%s'.",
+                $answer,
+                $round['answer']
+            );
+            line("Let's try again, %s!", $name);
+            return;
+        }
+
+        line('Correct!');
+    }
+
+    line('Congratulations, %s!', $name);
+}
+
+function welcomeUser(): string
+{
+    line('Welcome to the Brain Games!');
+    $name = prompt('May I have your name?');
+    line("Hello, %s!", $name);
+
+    return $name;
+}
+
+
 function gcd(int $a, int $b): int
 {
     while ($b !== 0) {

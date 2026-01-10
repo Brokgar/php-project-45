@@ -5,33 +5,31 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use function BrainGames\Cli\welcomeUser;
 use function BrainGames\Engine\makeArray;
+use function cli\line;
+use function cli\prompt;
 
 $name = welcomeUser();
 
-echo "What number is missing in the progression?\n";
+line('What number is missing in the progression?');
 
 $rounds = 3;
 
-for ($i = 0; $i < $rounds; $i++)
-    {
+for ($i = 0; $i < $rounds; $i++) {
     $array = makeArray();
     $answerIndex = rand(0, count($array) - 1);
     $correctAnswer = $array[$answerIndex];
-    $array[$answerIndex] = "..";
+    $array[$answerIndex] = '..';
 
+    line('Question: %s', implode(' ', $array));
+    $answer = prompt('Your answer');
 
-    echo "Question: " . implode(" ", $array) . PHP_EOL;
-    echo "Your answer: ";
-
-    $answer = trim(fgets(STDIN));
-
-    if ($answer !== (string)$correctAnswer) {
-        echo "'{$answer}' is wrong answer ;(. Correct answer was '{$correctAnswer}'.\n";
-        echo "Let's try again, {$name}!\n";
+    if ($answer !== (string) $correctAnswer) {
+        line("'%s' is wrong answer ;(. Correct answer was '%s'.", $answer, $correctAnswer);
+        line("Let's try again, %s!", $name);
         exit;
     }
 
-    echo "Correct!\n";
+    line('Correct!');
 }
 
-echo "Congratulations, {$name}!\n";
+line('Congratulations, %s!', $name);

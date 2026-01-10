@@ -4,7 +4,8 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use function BrainGames\Cli\welcomeUser;
-
+use function cli\line;
+use function cli\prompt;
 
 $name = welcomeUser();
 
@@ -30,18 +31,16 @@ for ($i = 0; $i < $rounds; $i++) {
             break;
     }
 
-    echo "Question: {$a} {$op} {$b}\n";
-    echo "Your answer: ";
-
-    $answer = trim(fgets(STDIN));
+    line("Question: %d %s %d", $a, $op, $b);
+    $answer = prompt('Your answer');
 
     if ((int)$answer !== $correct) {
-        echo "'{$answer}' is wrong answer ;(. Correct answer was '{$correct}'.\n";
-        echo "Let's try again, {$name}!\n";
+        line("'%s' is wrong answer ;(. Correct answer was '%d'.", $answer, $correctAnswer);
+        line("Let's try again, %s!", $name);
         exit;
     }
 
-    echo "Correct!\n";
+    line('Correct!');
 }
 
-echo "Congratulations, {$name}!\n";
+line('Congratulations, %s!', $name);

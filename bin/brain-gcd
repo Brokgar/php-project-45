@@ -5,10 +5,12 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use function BrainGames\Cli\welcomeUser;
 use function BrainGames\Engine\gcd;
+use function cli\line;
+use function cli\prompt;
 
 $name = welcomeUser();
 
-echo "Find the greatest common divisor of given numbers.\n";
+line('Find the greatest common divisor of given numbers.');
 
 $rounds = 3;
 
@@ -16,21 +18,18 @@ for ($i = 0; $i < $rounds; $i++) {
     $a = rand(1, 50);
     $b = rand(1, 50);
 
+    line('Question: %d %d', $a, $b);
+    $answer = prompt('Your answer');
 
-    echo "Question: {$a} {$b}\n";
-    echo "Your answer: ";
+    $correctAnswer = gcd($a, $b);
 
-    $answer        = trim(fgets(STDIN));
-    $correct = gcd($a, $b);
-
-
-    if ((int)$answer !== $correct) {
-        echo "'{$answer}' is wrong answer ;(. Correct answer was '{$correct}'.\n";
-        echo "Let's try again, {$name}!\n";
+    if ((int) $answer !== $correctAnswer) {
+        line("'%s' is wrong answer ;(. Correct answer was '%d'.", $answer, $correctAnswer);
+        line("Let's try again, %s!", $name);
         exit;
     }
 
-    echo "Correct!\n";
+    line('Correct!');
 }
 
-echo "Congratulations, {$name}!\n";
+line('Congratulations, %s!', $name);
