@@ -14,5 +14,7 @@ foreach ($autoloadPaths as $path) {
 }
 
 use function cli\line;
+use function cli\prompt;
 
 line('Welcome to the Brain Games!');
+prompt('May I have your name?');
