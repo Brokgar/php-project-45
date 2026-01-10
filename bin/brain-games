@@ -12,3 +12,7 @@ foreach ($autoloadPaths as $path) {
         break;
     }
 }
+
+use function cli\line;
+
+line('Welcome to the Brain Games!');
