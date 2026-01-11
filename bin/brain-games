@@ -2,8 +2,8 @@
 <?php
 
 $autoloadPaths = [
-    __DIR__ . '/../vendor/autoload.php',        // локальная разработка
-    __DIR__ . '/../../../autoload.php',         // установленный пакет
+    __DIR__ . '/../vendor/autoload.php',
+    __DIR__ . '/../../../autoload.php',
 ];
 
 foreach ($autoloadPaths as $path) {
