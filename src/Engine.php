@@ -5,6 +5,8 @@ namespace BrainGames;
 use function cli\line;
 use function cli\prompt;
 
+const ROUND_NUMBER = 3;
+
 function runGame(string $description, callable $getRoundData): void
 {
     line('Welcome to the Brain Games!');
@@ -13,7 +15,7 @@ function runGame(string $description, callable $getRoundData): void
 
     line($description);
 
-    for ($i = 0; $i < 3; $i++) {
+    for ($i = 0; $i < ROUND_NUMBER; $i++) {
         [$question, $correctAnswer] = $getRoundData();
 
         line('Question: %s', $question);

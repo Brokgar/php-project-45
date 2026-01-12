@@ -14,18 +14,23 @@ function run(): void
             $operations = ['+', '-', '*'];
             $operation = $operations[array_rand($operations)];
 
-            switch ($operation) {
-                case '+':
-                    $answer = $a + $b;
-                    break;
-                case '-':
-                    $answer = $a - $b;
-                    break;
-                default:
-                    $answer = $a * $b;
-            }
+            $answer = calculate($a, $b, $operation);
 
             return ["{$a} {$operation} {$b}", $answer];
         }
     );
+}
+
+function calculate(int $a, int $b, string $operation): int
+{
+    switch ($operation) {
+        case '+':
+            return $a + $b;
+        case '-':
+            return $a - $b;
+        case '*':
+            return $a * $b;
+        default:
+            throw new \InvalidArgumentException("Unknown operation: {$operation}");
+    }
 }

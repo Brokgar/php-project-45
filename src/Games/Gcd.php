@@ -4,15 +4,6 @@ namespace BrainGames\Games\Gcd;
 
 use function BrainGames\runGame;
 
-function getGcd(int $a, int $b): int
-{
-    while ($b !== 0) {
-        [$a, $b] = [$b, $a % $b];
-    }
-
-    return $a;
-}
-
 function run(): void
 {
     runGame(
@@ -24,4 +15,13 @@ function run(): void
             return ["{$a} {$b}", getGcd($a, $b)];
         }
     );
+}
+
+function getGcd(int $a, int $b): int
+{
+    while ($b !== 0) {
+        [$a, $b] = [$b, $a % $b];
+    }
+
+    return $a;
 }

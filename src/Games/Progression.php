@@ -13,16 +13,29 @@ function run(): void
             $start = rand(1, 50);
             $step = rand(2, 10);
 
-            $progression = [];
-            for ($i = 0; $i < $length; $i++) {
-                $progression[] = $start + $i * $step;
-            }
-
+            $progression = generateProgression($start, $step, $length);
             $hiddenIndex = rand(0, $length - 1);
-            $answer = $progression[$hiddenIndex];
-            $progression[$hiddenIndex] = '..';
 
-            return [implode(' ', $progression), $answer];
+            return makeQuestion($progression, $hiddenIndex);
         }
     );
+}
+
+function generateProgression(int $start, int $step, int $length): array
+{
+    $progression = [];
+
+    for ($i = 0; $i < $length; $i++) {
+        $progression[] = $start + $i * $step;
+    }
+
+    return $progression;
+}
+
+function makeQuestion(array $progression, int $hiddenIndex): array
+{
+    $answer = $progression[$hiddenIndex];
+    $progression[$hiddenIndex] = '..';
+
+    return [implode(' ', $progression), $answer];
 }
