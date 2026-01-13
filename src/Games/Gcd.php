@@ -4,13 +4,18 @@ namespace BrainGames\Games\Gcd;
 
 use function BrainGames\runGame;
 
+const DESCRIPTION = 'Find the greatest common divisor of given numbers.';
+const MIN_NUMBER = 1;
+const MAX_NUMBER = 100;
+
+
 function run(): void
 {
     runGame(
-        'Find the greatest common divisor of given numbers.',
+        DESCRIPTION,
         function () {
-            $a = rand(1, 100);
-            $b = rand(1, 100);
+            $a = rand(MIN_NUMBER, MAX_NUMBER);
+            $b = rand(MIN_NUMBER, MAX_NUMBER);
 
             return ["{$a} {$b}", getGcd($a, $b)];
         }
