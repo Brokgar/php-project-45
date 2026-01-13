@@ -15,4 +15,4 @@ foreach ($autoloadPaths as $path) {
 
 use function BrainGames\Cli\welcome;
 
-$name = welcome();
+welcome();
