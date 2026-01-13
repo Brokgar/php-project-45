@@ -4,13 +4,18 @@ namespace BrainGames\Games\Calc;
 
 use function BrainGames\runGame;
 
+const DESCRIPTION = 'What is the result of the expression?';
+const MIN_NUMBER = 1;
+const MAX_NUMBER = 50;
+
+
 function run(): void
 {
     runGame(
-        'What is the result of the expression?',
+        DESCRIPTION,
         function () {
-            $a = rand(1, 50);
-            $b = rand(1, 50);
+            $a = rand(MIN_NUMBER, MAX_NUMBER);
+            $b = rand(MIN_NUMBER, MAX_NUMBER);
             $operations = ['+', '-', '*'];
             $operation = $operations[array_rand($operations)];
 
